@@ -8,6 +8,6 @@ class VinotekaApplicationTests {
 
 	@Test
 	void contextLoads() {
-	}		// TODO baca error
+	}
 
 }

@@ -1,14 +1,16 @@
 package com.fer.insus.vin.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
 @Entity(name = "wine")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Wine {
 
     @Id
@@ -41,4 +43,21 @@ public class Wine {
 
     @ManyToMany(mappedBy = "wines")
     private List<WineOrder> orders;
+
+    public Wine(String name, Integer harvest, Double alcoholPercentage,
+                String maltster, String quality, String vineyard,
+                Double temperatureOfServing, String gastroRecommendation,
+                String description, Double price, Sort sort) {
+        this.name = name;
+        this.harvest = harvest;
+        this.alcoholPercentage = alcoholPercentage;
+        this.maltster = maltster;
+        this.quality = quality;
+        this.vineyard = vineyard;
+        this.temperatureOfServing = temperatureOfServing;
+        this.gastroRecommendation = gastroRecommendation;
+        this.description = description;
+        this.price = price;
+        this.sort = sort;
+    }
 }
