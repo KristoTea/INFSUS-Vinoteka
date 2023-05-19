@@ -1,16 +1,15 @@
 package com.fer.insus.vin.rest;
 
 import com.fer.insus.vin.domain.Wine;
+import com.fer.insus.vin.domain.WineOrder;
 import com.fer.insus.vin.service.WineService;
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @AllArgsConstructor
 @RestController
@@ -32,7 +31,7 @@ public class WineController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addNewWine(@Valid @RequestBody AddWineRequest addNewWineRequest) {
+    public ResponseEntity<Void> addNewWine(@Valid @RequestBody WineRequest addNewWineRequest) {
         wineService.addWine(addNewWineRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -44,8 +43,15 @@ public class WineController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateWineWithId(@PathVariable Long id ){
-        // TODO update, dodat mapper
+    public ResponseEntity<Void> updateWineWithId(@PathVariable Long id,
+                                                 @Valid@RequestBody WineRequest wineRequest){
+        wineService.updateWine(id, wineRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/{id}/orders")
+    public ResponseEntity<List<WineOrder>> getAllOrdersWhereIsWineWithId(@PathVariable Long id) {
+        var ordersList = wineService.getAllOrders(id);
+        return new ResponseEntity<>(ordersList, HttpStatus.OK);
     }
 }

@@ -1,14 +1,17 @@
 package com.fer.insus.vin.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 @Data
-// TODO anotacija za bilo kakav konstruktor
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "wine_order")
 public class WineOrder {
 
@@ -36,16 +39,6 @@ public class WineOrder {
             inverseJoinColumns = @JoinColumn(name = "wine_id")
     )
     private List<Wine> wines;
-
-    public WineOrder(OrderStatus orderStatus, Double totalPrice, PaymentMethod paymentMethod) {
-        this.orderStatus = orderStatus;
-        this.totalPrice = totalPrice;
-        this.paymentMethod = paymentMethod;
-    }
-
-    public WineOrder() {
-
-    }
 }
 
 enum OrderStatus {
