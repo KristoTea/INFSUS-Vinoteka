@@ -3,7 +3,6 @@ package com.fer.insus.vin.service.impl;
 import com.fer.insus.vin.dao.SortRepository;
 import com.fer.insus.vin.dao.WineRepository;
 import com.fer.insus.vin.domain.Wine;
-import com.fer.insus.vin.domain.WineOrder;
 import com.fer.insus.vin.rest.WineRequest;
 import com.fer.insus.vin.service.WineService;
 import lombok.AllArgsConstructor;
@@ -52,11 +51,6 @@ public class WineServiceJpa implements WineService {
         var wine = wineRepository.findById(id).orElseThrow();
         updateWineElements(wine, wineRequest);
         wineRepository.save(wine);
-    }
-
-    @Override
-    public List<WineOrder> getAllOrders(Long wineId) {
-        return wineRepository.findById(wineId).get().getOrders();
     }
 
     private Wine updateWineElements(Wine wine, WineRequest wineRequest) {

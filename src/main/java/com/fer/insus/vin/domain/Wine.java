@@ -7,6 +7,8 @@ import lombok.*;
 import java.util.List;
 
 @Data
+@Getter
+@Setter
 @Entity(name = "wine")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,7 +39,7 @@ public class Wine {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name="sort_id")
+    @JoinColumn(name = "sort_id")
     private Sort sort;
 
     @JsonManagedReference
@@ -48,6 +50,23 @@ public class Wine {
                 String maltster, String quality, String vineyard,
                 Double temperatureOfServing, String gastroRecommendation,
                 String description, Double price, Sort sort) {
+        this.name = name;
+        this.harvest = harvest;
+        this.alcoholPercentage = alcoholPercentage;
+        this.maltster = maltster;
+        this.quality = quality;
+        this.vineyard = vineyard;
+        this.temperatureOfServing = temperatureOfServing;
+        this.gastroRecommendation = gastroRecommendation;
+        this.description = description;
+        this.price = price;
+        this.sort = sort;
+    }
+
+    public Wine(Long id, String name, Integer harvest, Double alcoholPercentage,
+                String maltster, String quality, String vineyard, Double temperatureOfServing,
+                String gastroRecommendation, String description, Double price, Sort sort) {
+        this.id = id;
         this.name = name;
         this.harvest = harvest;
         this.alcoholPercentage = alcoholPercentage;

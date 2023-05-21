@@ -48,10 +48,4 @@ public class WineController {
         wineService.updateWine(id, wineRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/{id}/orders")
-    public ResponseEntity<List<WineOrder>> getAllOrdersWhereIsWineWithId(@PathVariable Long id) {
-        var ordersList = wineService.getAllOrders(id);
-        return new ResponseEntity<>(ordersList, HttpStatus.OK);
-    }
 }

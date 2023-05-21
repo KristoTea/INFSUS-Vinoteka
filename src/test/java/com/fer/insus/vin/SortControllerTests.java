@@ -8,10 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -31,17 +29,17 @@ public class SortControllerTests {
 
     @Test
     void testGetAllSorts() {
-        // Prepare
-        List<Sort> expectedSortList = new ArrayList<>();
-        expectedSortList.add(createSort(1L, "Sort1", "Sort1 Description"));
-        expectedSortList.add(createSort(2L, "Sort2", "Sort2 Description"));
+        // Given
+        var expectedSortList = new ArrayList<Sort>();
+        expectedSortList.add(createSort(1L, "Sort1", "Sort description"));
+        expectedSortList.add(createSort(2L, "Sort2", "Sort description"));
 
         when(sortService.getAllSorts()).thenReturn(expectedSortList);
 
-        // Execute
-        ResponseEntity<List<Sort>> response = sortController.getAllSorts();
+        // When
+        var response = sortController.getAllSorts();
 
-        // Verify
+        // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expectedSortList, response.getBody());
     }

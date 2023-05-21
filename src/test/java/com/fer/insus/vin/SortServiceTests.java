@@ -1,25 +1,52 @@
-package com.fer.insus.vin;
+package com.fer.insus.vin.service.impl;
 
+import com.fer.insus.vin.dao.SortRepository;
 import com.fer.insus.vin.domain.Sort;
-import com.fer.insus.vin.service.SortService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-public class SortServiceTests {
+import java.util.ArrayList;
+import java.util.List;
 
-    @Autowired
-    SortService sortService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+class SortServiceTests {
+
+    private SortServiceJpa sortServiceJpa;
+
+    @Mock
+    private SortRepository sortRepository;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        sortServiceJpa = new SortServiceJpa(sortRepository);
+    }
 
     @Test
-    void shouldGetAllSortsSuccessfully() {
+    void testGetAllSorts() {
         // Given
+        List<Sort> expectedSortList = new ArrayList<>();
+        expectedSortList.add(createSort(1L, "Sort1", "Sort description"));
+        expectedSortList.add(createSort(2L, "Sort2", "Sort description"));
+
+        when(sortRepository.findAll()).thenReturn(expectedSortList);
 
         // When
-        var sortsList = sortService.getAllSorts();
+        List<Sort> actualSortList = sortServiceJpa.getAllSorts();
 
         // Then
-        for (Sort sort : sortsList) {
-            System.out.println(sort);
-        }
+        assertEquals(expectedSortList, actualSortList);
+    }
+
+    private Sort createSort(Long id, String name, String description) {
+        Sort sort = new Sort();
+        sort.setId(id);
+        sort.setName(name);
+        sort.setDescription(description);
+        return sort;
     }
 }

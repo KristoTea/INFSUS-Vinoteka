@@ -13,5 +13,4 @@ public interface WineService {
     void addWine(WineRequest wineRequest);
     void deleteWineById(Long id);
     void updateWine(Long id, WineRequest wineRequest);
-    List<WineOrder> getAllOrders(Long wineId);
 }
