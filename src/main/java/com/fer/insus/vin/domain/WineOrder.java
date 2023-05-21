@@ -1,5 +1,6 @@
 package com.fer.insus.vin.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,7 @@ public class WineOrder {
     @Column(name = "creation_timestamp")
     private Timestamp creationTimestamp;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "wineorder_wine",
