@@ -1,5 +1,6 @@
 package com.fer.insus.vin.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,12 +20,14 @@ public class WineOrder {
     @GeneratedValue
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus orderStatus;
 
     @Column(name = "total_price")
     private Double totalPrice;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
@@ -32,6 +35,7 @@ public class WineOrder {
     @Column(name = "creation_timestamp")
     private Timestamp creationTimestamp;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "wineorder_wine",

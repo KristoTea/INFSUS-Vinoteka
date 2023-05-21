@@ -1,5 +1,6 @@
 package com.fer.insus.vin.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,6 +40,7 @@ public class Wine {
     @JoinColumn(name="sort_id")
     private Sort sort;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "wines")
     private List<WineOrder> orders;
 

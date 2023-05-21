@@ -44,7 +44,7 @@ public class WineServiceJpa implements WineService {
 
     @Override
     public void deleteWineById(Long id) {
-        sortRepository.deleteById(id);
+        wineRepository.deleteById(id);
     }
 
     @Override
