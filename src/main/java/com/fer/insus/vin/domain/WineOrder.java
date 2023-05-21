@@ -19,12 +19,14 @@ public class WineOrder {
     @GeneratedValue
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "order_status")
     private OrderStatus orderStatus;
 
     @Column(name = "total_price")
     private Double totalPrice;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "payment_method")
     private PaymentMethod paymentMethod;
 
