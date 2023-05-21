@@ -56,8 +56,7 @@ public class WineServiceJpa implements WineService {
 
     @Override
     public List<WineOrder> getAllOrders(Long wineId) {
-       // return wineRepository.findWineOrdersByWineId(wineId);
-        return null;
+        return wineRepository.findById(wineId).get().getOrders();
     }
 
     private Wine updateWineElements(Wine wine, WineRequest wineRequest) {
